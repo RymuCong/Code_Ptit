@@ -1,8 +1,7 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
 
-int checkSNT(int n)
+int checkSNT (int n)
 {
     if (n <= 1)
         return 0;
@@ -16,19 +15,24 @@ int checkSNT(int n)
     return 1;
 }
 
-int main()
+void capNguyenTo (int n)
+{
+    for (int i = 2; i <= n; i++)
+        if (checkSNT(i) && checkSNT(n-i))
+        {
+            cout << i << " " << n - i << endl;
+            return;
+        }
+}
+
+int main ()
 {
     int t;
     cin >> t;
     while (t--)
     {
-        int a, b;
-        cin >> a >> b;
-        for (int i = a; i <= b; i++)
-        {
-            if (checkSNT(i))
-                cout << i << " ";
-        }
-        cout << endl;
+        int n;
+        cin >> n;
+        capNguyenTo(n);
     }
 }

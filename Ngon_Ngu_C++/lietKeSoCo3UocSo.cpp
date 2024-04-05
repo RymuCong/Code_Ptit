@@ -10,25 +10,24 @@ int checkSNT(int n)
         return 1;
     if (n % 2 == 0 || n % 3 == 0)
         return 0;
-    for (int i = 5; i * i <= n; i += 6)
-        if (n % i == 0 || n % (i+2) == 0)
+    for (int i = 5; i * i <= n; i = i + 6)
+        if (n % i == 0 || n % (i + 2) == 0)
             return 0;
     return 1;
 }
 
 int main()
 {
-    int t;
-    cin >> t;
-    while (t--)
+    int T;
+    cin >> T;
+    while (T--)
     {
-        int a, b;
-        cin >> a >> b;
-        for (int i = a; i <= b; i++)
-        {
+        int n;
+        cin >> n;
+        for (int i = 1; i*i <= n; i++)
             if (checkSNT(i))
-                cout << i << " ";
-        }
+                cout << i*i << " ";
         cout << endl;
     }
+    return 0;
 }

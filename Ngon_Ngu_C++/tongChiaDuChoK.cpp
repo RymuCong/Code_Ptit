@@ -12,7 +12,10 @@ int main() {
         long long soDu = N % K;
         long long tongSoDu = (soDu * (soDu + 1) / 2);
         long long S = tongChuoiHoanChinh + tongSoDu;
-        cout << S << endl;
+        if (S == K)
+            cout << 1 << endl;
+        else
+            cout << 0 << endl;
     }
     return 0;
 }
