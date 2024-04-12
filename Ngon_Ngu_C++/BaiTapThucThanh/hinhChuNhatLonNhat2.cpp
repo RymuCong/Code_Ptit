@@ -1,26 +1,46 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <stack>
 using namespace std;
 
-int largestRectangle(vector<vector<int>>& A) {
-    int N = A.size(), M = A[0].size();
-    vector<vector<int>> dp(N, vector<int>(M, 0));
-    int maxRectangle = 0;
+int maxRectangle(vector<vector<int>>& matrix) {
+    int n = matrix.size();
+    int m = matrix[0].size();
+    vector<vector<int>> dp(n, vector<int>(m, 0));
+    int maxArea = 0;
 
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < M; ++j) {
-            if (A[i][j] == 1) {
-                dp[i][j] = 1;
-                if (i > 0 && j > 0) {
-                    dp[i][j] += min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]});
-                }
-                maxRectangle = max(maxRectangle, dp[i][j]);
+    // Tính chi?u cao liên t?c c?a c?t
+    for (int j = 0; j < m; ++j) {
+        for (int i = 0; i < n; ++i) {
+            if (matrix[i][j] == 1) {
+                dp[i][j] = (i == 0) ? 1 : dp[i-1][j] + 1;
             }
         }
     }
 
-    return maxRectangle * maxRectangle;
+    // Tính di?n tích l?n nh?t cho m?i hàng c?a dp
+    for (int i = 0; i < n; ++i) {
+        stack<int> st;
+        int j = 0;
+        while (j < m) {
+            if (st.empty() || dp[i][st.top()] <= dp[i][j]) {
+                st.push(j++);
+            } else {
+                int top = st.top();
+                st.pop();
+                int area = dp[i][top] * (st.empty() ? j : j - st.top() - 1);
+                maxArea = max(maxArea, area);
+            }
+        }
+        while (!st.empty()) {
+            int top = st.top();
+            st.pop();
+            int area = dp[i][top] * (st.empty() ? j : j - st.top() - 1);
+            maxArea = max(maxArea, area);
+        }
+    }
+
+    return maxArea;
 }
 
 int main() {
@@ -29,13 +49,13 @@ int main() {
     while (T--) {
         int N, M;
         cin >> N >> M;
-        vector<vector<int>> A(N, vector<int>(M));
+        vector<vector<int>> matrix(N, vector<int>(M));
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < M; ++j) {
-                cin >> A[i][j];
+                cin >> matrix[i][j];
             }
         }
-        cout << largestRectangle(A) << endl;
+        cout << maxRectangle(matrix) << endl;
     }
     return 0;
 }
