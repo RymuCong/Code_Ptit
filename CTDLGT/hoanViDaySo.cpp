@@ -1,42 +1,33 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
-int a[10], n, unused[10];
-
-void in(int b[])
+void printArray(int a[], int n)
 {
-    int i;
-    for (i = 1; i <= n; i++)
-        cout << b[a[i]] << " ";
+    for (int i = 0; i < n; i++)
+    {
+        cout << a[i] << " ";
+    }
     cout << endl;
 }
 
-void quayluiHV(int j, int b[])
+void hoanVi(int a[], int n)
 {
-    for (int i = 1; i <= n; i++)
+    sort(a, a + n);
+    do
     {
-        if (unused[i] == 1)
-        {
-            a[j] = i;
-            unused[i] = 0;
-            if (j == n)
-                in(b);
-            else
-                quayluiHV(j + 1, b);
-            unused[i] = 1;
-        }
-    }
+        printArray(a, n);
+    } while (next_permutation(a, a + n)); // đưa ra hoán vị tiếp theo của dãy số
 }
 
 int main()
 {
+    int n;
     cin >> n;
-    int b[n];
-    for (int i = 1; i <= n; i++)
-        cin >> b[i];
-    sort(b + 1, b + n);
-    for (int i = 1; i <= n; i++)
-        unused[i] = 1;
-    quayluiHV(1, b);
+    int a[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    hoanVi(a, n);
+    return 0;
 }

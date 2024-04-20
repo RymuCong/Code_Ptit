@@ -5,14 +5,13 @@ using namespace std;
 
 class SinhVien {
 private:
-    static int dem; // Bi?n d?m t? tang d? t?o mã sinh viên
+    static int dem;
     string maSV;
     string hoTen;
     string lop;
     string ngaySinh;
     float diemGPA;
 
-    // Hàm chu?n hóa ngày sinh
     void chuanHoaNgaySinh() {
         stringstream ss(ngaySinh);
         int ngay, thang, nam;
@@ -36,8 +35,8 @@ public:
         getline(in, sv.lop);
         getline(in, sv.ngaySinh);
         in >> sv.diemGPA;
-        in.ignore(); // Lo?i b? ký t? xu?ng dòng th?a sau khi nh?p diemGPA
-        sv.chuanHoaNgaySinh(); // Chu?n hóa ngày sinh
+        in.ignore(); 
+        sv.chuanHoaNgaySinh();
         return in;
     }
 
@@ -47,13 +46,13 @@ public:
     }
 };
 
-int SinhVien::dem = 0; // Kh?i t?o giá tr? ban d?u cho bi?n d?m
+int SinhVien::dem = 0; // Kh?i t?o giï¿½ tr? ban d?u cho bi?n d?m
 
 int main(){
     SinhVien ds[50];
     int N, i;
     cin >> N;
-    cin.ignore(); // Lo?i b? ký t? xu?ng dòng th?a sau khi nh?p N
+    cin.ignore(); // Lo?i b? kï¿½ t? xu?ng dï¿½ng th?a sau khi nh?p N
     for(i = 0; i < N; i++){
         cin >> ds[i];
     }
