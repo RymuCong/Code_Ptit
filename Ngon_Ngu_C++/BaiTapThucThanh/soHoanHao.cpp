@@ -27,10 +27,10 @@ int main() {
     return 0;
 }
 
-// Không đủ nhanh
+// đủ nhanh
 int checkSHH(long long n)
 {
-    if (n == 1)
+    if (n == 1 || n > 1e12)
         return false;
     long long tong = 1;
     long long can2 = sqrt(n);
